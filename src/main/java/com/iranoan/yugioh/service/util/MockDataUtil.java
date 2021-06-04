@@ -1,7 +1,9 @@
 package com.iranoan.yugioh.service.util;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
@@ -33,17 +35,27 @@ public class MockDataUtil {
 			cardDTO.setCardType("ドラゴン族");
 			cardDTO.setCardAttack(1000 + i);
 			cardDTO.setCardDefence(1000 - i);
-			cardDTO.setTextValues("¥10,230〜¥50,000");
 			cardDTO.setImageUrl("images/card" + i);
-			cardDTO.setValues(createPriceDTOs(24));
+			List<ValueDTO> valueDTOs = createValueDTOs(24);
+			Integer minValue = valueDTOs.stream() //
+					.map(ValueDTO::getValue) //
+					.min(Comparator.comparing(Integer::intValue)) //
+					.get();
+			Integer maxValue = valueDTOs.stream() //
+					.map(ValueDTO::getValue) //
+					.max(Comparator.comparing(Integer::intValue)) //
+					.get();
+			cardDTO.setMinValue(minValue);
+			cardDTO.setMaxValue(maxValue);
+			cardDTO.setValues(valueDTOs);
 			cardDTOs.add(cardDTO);
 		}
 		return cardDTOs;
 	}
 
-	private static List<ValueDTO> createPriceDTOs(int numberElements) {
+	private static List<ValueDTO> createValueDTOs(int numberElements) {
 		List<ValueDTO> valueDTOs = new ArrayList<>();
-		LocalDateTime currentDateTime = LocalDateTime.now();
+		LocalDateTime currentDateTime = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS);
 		LocalDateTime beginDateTime = currentDateTime.minusHours(numberElements);
 		for (int i = 0; i < numberElements; i++) {
 			ValueDTO valueDTO = new ValueDTO(beginDateTime.plusHours(i), getRandomPrice());

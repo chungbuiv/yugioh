@@ -19,7 +19,6 @@ public class CardDTO extends CardBasicDTO {
 	private String cardType;
 	private Integer cardAttack;
 	private Integer cardDefence;
-	private String textValues;
 	private Integer minValue;
 	private Integer maxValue;
 	private String imageUrl;

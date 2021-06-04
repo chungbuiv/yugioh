@@ -26,7 +26,7 @@ public class CardRepository {
 		return cardDTOs.stream().limit(numberCards).collect(toList());
 	}
 
-	public Optional<CardDTO> findByCardId(String cardId) {
+	public Optional<CardDTO> findByCardId(Long cardId) {
 		return cardDTOs.stream().filter(card -> card.getId().equals(cardId)).findFirst();
 	}
 

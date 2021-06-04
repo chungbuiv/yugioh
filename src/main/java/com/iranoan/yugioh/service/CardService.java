@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.iranoan.yugioh.repository.CardDetailRepository;
 import com.iranoan.yugioh.repository.CardRepository;
-import com.iranoan.yugioh.repository.RarityRepository;
 import com.iranoan.yugioh.service.dto.CardBasicDTO;
 import com.iranoan.yugioh.service.dto.CardDTO;
 import com.iranoan.yugioh.service.dto.CardDetailDTO;
@@ -44,7 +43,7 @@ public class CardService {
 
 	public CardInitDTO initCards() {
 		CardInitDTO initCardDTO = new CardInitDTO();
-		List<CardDTO> cardDTOs = cardRepository.getLimitedCardDTOs(10);
+		List<CardDTO> cardDTOs = cardRepository.getLimitedCardDTOs(3);
 		initCardDTO.setInitCards(cardDTOs);
 		return initCardDTO;
 	}

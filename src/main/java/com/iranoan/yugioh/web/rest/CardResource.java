@@ -14,23 +14,23 @@ import com.iranoan.yugioh.service.dto.SearchedCardDTO;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/rest")
+@RequestMapping("/rest/card")
 @RequiredArgsConstructor
 public class CardResource {
 
 	private final CardService cardService;
 
-	@GetMapping("/searchCards")
+	@GetMapping("/search")
 	public SearchedCardDTO searchCards(@RequestParam(value = "keyword", required = false) String keyword) {
 		return cardService.searchCards(keyword);
 	}
 
-	@GetMapping("/initCards")
+	@GetMapping("/init")
 	public CardInitDTO initCards() {
 		return cardService.initCards();
 	}
 
-	@GetMapping("/cardDetail/{id}")
+	@GetMapping("/detail/{id}")
 	public CardDetailDTO getCardDetail(@PathVariable("id") Long cardId) {
 		return cardService.getCardDetail(cardId).orElse(null);
 	}
