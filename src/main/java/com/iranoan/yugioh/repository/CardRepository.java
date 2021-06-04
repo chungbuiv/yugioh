@@ -27,7 +27,7 @@ public class CardRepository {
 	}
 
 	public Optional<CardDTO> findByCardId(String cardId) {
-		return cardDTOs.stream().filter(card -> card.getCardId().equals(cardId)).findFirst();
+		return cardDTOs.stream().filter(card -> card.getId().equals(cardId)).findFirst();
 	}
 
 	public List<CardDTO> searchCardByKeyword(String keyword) {

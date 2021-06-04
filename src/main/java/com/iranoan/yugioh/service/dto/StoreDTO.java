@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class StoreDTO {
-	private Integer cardStatus;
-	private Integer cardPrice;
-	private String cardID;
 	private String storeName;
-	private String link;
+	private String storeLink;
+	private String quality;
+	private Integer price;
+	private Integer volume;
 }

@@ -3,18 +3,16 @@ package com.iranoan.yugioh.service.dto;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class CardDTO {
-	@JsonProperty("cardID")
-	private String cardId;
+@EqualsAndHashCode(callSuper = true)
+public class CardDTO extends CardBasicDTO {
 	@JsonIgnore
 	private String cardCode;
 
-	private String cardName;
 	private String cardNameEnglish;
 	private String cardProperty;
 	private Integer cardRank;
@@ -22,6 +20,8 @@ public class CardDTO {
 	private Integer cardAttack;
 	private Integer cardDefence;
 	private String textValues;
-	private String url;
-	private List<Integer> values;
+	private Integer minValue;
+	private Integer maxValue;
+	private String imageUrl;
+	private List<ValueDTO> values;
 }

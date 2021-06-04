@@ -5,6 +5,6 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class InitCardDTO {
+public class CardInitDTO {
 	private List<CardDTO> initCards;
 }

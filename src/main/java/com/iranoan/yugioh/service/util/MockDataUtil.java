@@ -1,25 +1,30 @@
 package com.iranoan.yugioh.service.util;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 import com.iranoan.yugioh.service.dto.CardDTO;
+import com.iranoan.yugioh.service.dto.CardDetailDTO;
 import com.iranoan.yugioh.service.dto.NewsDTO;
 import com.iranoan.yugioh.service.dto.RarityDTO;
 import com.iranoan.yugioh.service.dto.StoreDTO;
+import com.iranoan.yugioh.service.dto.ValueDTO;
 
 public class MockDataUtil {
 
 	private static final int NUMBER_CARD = 100;
-	private static final int NUMBER_NEWS = 100;
-	private static final int NUMBER_STORE = 100;
-	private static final int NUMBER_RARITY = 100;
+	private static final int NUMBER_NEWS = 10;
+	private static final int NUMBER_STORE = 5;
+	private static final int NUMBER_RARITY = 5;
 
 	public static List<CardDTO> generateCards() {
 		List<CardDTO> cardDTOs = new ArrayList<>();
 		for (int i = 0; i < NUMBER_CARD; i++) {
 			CardDTO cardDTO = new CardDTO();
-			cardDTO.setCardId("post-" + i);
+			cardDTO.setId(Long.valueOf(i));
 			cardDTO.setCardCode("PAC1-JP" + i);
 			cardDTO.setCardName("深淵の青眼龍" + i);
 			cardDTO.setCardNameEnglish("Blue-Eyes Abyss Dragon" + i);
@@ -29,11 +34,27 @@ public class MockDataUtil {
 			cardDTO.setCardAttack(1000 + i);
 			cardDTO.setCardDefence(1000 - i);
 			cardDTO.setTextValues("¥10,230〜¥50,000");
-			cardDTO.setUrl("images/card" + i);
-			cardDTO.setValues(List.of(50, 20, 30, 50, 30, 80));
+			cardDTO.setImageUrl("images/card" + i);
+			cardDTO.setValues(createPriceDTOs(24));
 			cardDTOs.add(cardDTO);
 		}
 		return cardDTOs;
+	}
+
+	private static List<ValueDTO> createPriceDTOs(int numberElements) {
+		List<ValueDTO> valueDTOs = new ArrayList<>();
+		LocalDateTime currentDateTime = LocalDateTime.now();
+		LocalDateTime beginDateTime = currentDateTime.minusHours(numberElements);
+		for (int i = 0; i < numberElements; i++) {
+			ValueDTO valueDTO = new ValueDTO(beginDateTime.plusHours(i), getRandomPrice());
+			valueDTOs.add(valueDTO);
+		}
+		return valueDTOs;
+	}
+
+	private static int getRandomPrice() {
+		int randomInt = ThreadLocalRandom.current().nextInt(1, 51);
+		return 100 * randomInt;
 	}
 
 	public static List<NewsDTO> generateNews() {
@@ -42,24 +63,20 @@ public class MockDataUtil {
 			NewsDTO newsDTO = new NewsDTO();
 			newsDTO.setContain("コナミフレンドリーショップ限定！デュエリストカードプロテクターセット「千年パズル／KC」発売決定！" + i);
 			newsDTO.setImgUrl("images/img" + i);
-			newsDTO.setLink("");
+			newsDTO.setLink("https://www.google.com/");
 			newsDTOs.add(newsDTO);
 		}
 		return newsDTOs;
 	}
 
-	public static List<StoreDTO> generateStores() {
-		List<StoreDTO> storeDTOs = new ArrayList<>();
-		for (int i = 0; i < NUMBER_STORE; i++) {
-			StoreDTO storeDTO = new StoreDTO();
-			storeDTO.setCardID("post-" + i);
-			storeDTO.setCardPrice(10000 + i);
-			storeDTO.setCardStatus(i % 3);
-			storeDTO.setStoreName("遊戯王カード専門店NaRi");
-			storeDTO.setLink("https://play.google.com/store?hl=en&tab=r8");
-			storeDTOs.add(storeDTO);
-		}
-		return storeDTOs;
+	public static List<CardDetailDTO> generateCardDetails() {
+		List<CardDTO> cardDTOs = generateCards();
+		return cardDTOs.stream().map(card -> {
+			CardDetailDTO cardDetailDTO = new CardDetailDTO();
+			cardDetailDTO.setCardInfo(card);
+			cardDetailDTO.setRarities(generateRarities());
+			return cardDetailDTO;
+		}).collect(Collectors.toList());
 	}
 
 	public static List<RarityDTO> generateRarities() {
@@ -68,8 +85,25 @@ public class MockDataUtil {
 			RarityDTO rarityDTO = new RarityDTO();
 			rarityDTO.setRarityCode("TDGS-JP" + i);
 			rarityDTO.setRarityName("ウルトラ" + i);
+			rarityDTO.setImageUrl("https://www.google.com/");
+			rarityDTO.setBuyStores(generateStores());
+			rarityDTO.setSellStores(generateStores());
 			rarityDTOs.add(rarityDTO);
 		}
 		return rarityDTOs;
+	}
+
+	private static List<StoreDTO> generateStores() {
+		List<StoreDTO> storeDTOs = new ArrayList<>();
+		for (int i = 0; i < NUMBER_STORE; i++) {
+			StoreDTO storeDTO = new StoreDTO();
+			storeDTO.setStoreName("Store ABC");
+			storeDTO.setStoreLink("https://www.google.com/");
+			storeDTO.setQuality("Good");
+			storeDTO.setVolume(10);
+			storeDTO.setPrice(1000);
+			storeDTOs.add(storeDTO);
+		}
+		return storeDTOs;
 	}
 }
