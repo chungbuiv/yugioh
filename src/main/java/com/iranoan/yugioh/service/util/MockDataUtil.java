@@ -31,7 +31,7 @@ public class MockDataUtil {
 		List<NewsDTO> newsDTOs = new ArrayList<>();
 		for (int i = 0; i < NUMBER_NEWS; i++) {
 			NewsDTO newsDTO = new NewsDTO();
-			newsDTO.setContain("コナミフレンドリーショップ限定！デュエリストカードプロテクターセット「千年パズル／KC」発売決定！" + i);
+			newsDTO.setContent("コナミフレンドリーショップ限定！デュエリストカードプロテクターセット「千年パズル／KC」発売決定！" + i);
 			newsDTO.setImgUrl("images/img" + i);
 			newsDTO.setLink("https://www.google.com/");
 			newsDTOs.add(newsDTO);

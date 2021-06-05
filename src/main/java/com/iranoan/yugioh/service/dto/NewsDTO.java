@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class NewsDTO {
-	private String contain;
+	private String content;
 	private String imgUrl;
 	private String link;
 }
