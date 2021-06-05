@@ -6,7 +6,7 @@ import lombok.Data;
 public class StoreDTO {
 	private String storeName;
 	private String storeLink;
-	private String quality;
+	private Integer quality;
 	private Integer price;
 	private Integer volume;
 }

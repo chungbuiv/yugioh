@@ -21,6 +21,5 @@ public class CardDTO extends CardBasicDTO {
 	private Integer cardDefence;
 	private Integer minValue;
 	private Integer maxValue;
-	private String imageUrl;
 	private List<ValueDTO> values;
 }

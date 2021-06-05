@@ -1,71 +1,71 @@
 package com.iranoan.yugioh.service.csv.dto;
 
-import com.opencsv.bean.CsvBindByPosition;
+import com.opencsv.bean.CsvBindByName;
 
 import lombok.Data;
 
 @Data
 public class CardCsvDTO {
-	@CsvBindByPosition(position = 0)
+	@CsvBindByName
 	private String cardName;
 
-	@CsvBindByPosition(position = 1)
+	@CsvBindByName
 	private String cardNameEnglish;
 
-	@CsvBindByPosition(position = 2)
+	@CsvBindByName
 	private String cardProperty;
 
-	@CsvBindByPosition(position = 3)
+	@CsvBindByName
 	private Integer cardRank;
 
-	@CsvBindByPosition(position = 4)
+	@CsvBindByName
 	private String cardType;
 
-	@CsvBindByPosition(position = 5)
+	@CsvBindByName
 	private Integer cardAttack;
 
-	@CsvBindByPosition(position = 6)
+	@CsvBindByName
 	private Integer cardDefence;
 
-	@CsvBindByPosition(position = 7)
+	@CsvBindByName
 	private String cardCode;
 
-	@CsvBindByPosition(position = 8)
+	@CsvBindByName
 	private String rarityCode;
 
-	@CsvBindByPosition(position = 9)
+	@CsvBindByName
 	private String imageUrl;
 
-	@CsvBindByPosition(position = 10)
+	@CsvBindByName
 	private String rarityName;
 
-	@CsvBindByPosition(position = 11)
+	@CsvBindByName
 	private String sellStoreName;
 
-	@CsvBindByPosition(position = 12)
+	@CsvBindByName
 	private String sellStoreLink;
 
-	@CsvBindByPosition(position = 13)
+	@CsvBindByName
 	private Integer sellCardPrice;
 
-	@CsvBindByPosition(position = 14)
+	@CsvBindByName
 	private Integer sellCardVolume;
 
-	@CsvBindByPosition(position = 15)
+	@CsvBindByName
 	private Integer sellQuality;
 
-	@CsvBindByPosition(position = 16)
+	@CsvBindByName
 	private String buyStoreName;
 
-	@CsvBindByPosition(position = 17)
+	@CsvBindByName
 	private String buyStoreLink;
 
-	@CsvBindByPosition(position = 18)
+	@CsvBindByName
 	private Integer buyCardPrice;
 
-	@CsvBindByPosition(position = 19)
+	@CsvBindByName
 	private Integer buyCardVolume;
 
-	@CsvBindByPosition(position = 20)
+	@CsvBindByName
 	private Integer buyQuality;
 }

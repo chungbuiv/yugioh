@@ -1,3 +1,8 @@
+logging:
+  level:
+    ROOT: INFO
+    com.iranoan.yugioh: DEBUG
+
 yugioh:
   csv:
-    filename: yugioh.csv
+    filename: C:\\Users\\Admin\\eclipse-workspace\\yugioh\\src\\main\\resources\\data_test.csv

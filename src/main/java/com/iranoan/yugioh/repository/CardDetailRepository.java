@@ -10,24 +10,24 @@ import org.springframework.stereotype.Repository;
 import com.iranoan.yugioh.service.dto.CardDetailDTO;
 import com.iranoan.yugioh.service.util.MockDataUtil;
 
-@Repository
-public class CardDetailRepository {
-	private static List<CardDetailDTO> cardDetailDTOs;
+import lombok.RequiredArgsConstructor;
 
-	static {
-		cardDetailDTOs = MockDataUtil.generateCardDetails();
-	}
+@Repository
+@RequiredArgsConstructor
+public class CardDetailRepository {
+
+	private final MockDataUtil mockDataUtil;
 
 	public List<CardDetailDTO> getAllCardDTOs() {
-		return cardDetailDTOs;
+		return mockDataUtil.generateCardDetails();
 	}
 
 	public List<CardDetailDTO> getLimitedCardDTOs(int numberCards) {
-		return cardDetailDTOs.stream().limit(numberCards).collect(toList());
+		return getAllCardDTOs().stream().limit(numberCards).collect(toList());
 	}
 
 	public Optional<CardDetailDTO> findByCardId(Long cardId) {
-		return cardDetailDTOs.stream()//
+		return getAllCardDTOs().stream()//
 				.filter(cardDetail -> cardDetail.getCardInfo().getId().equals(cardId)) //
 				.findFirst();
 	}

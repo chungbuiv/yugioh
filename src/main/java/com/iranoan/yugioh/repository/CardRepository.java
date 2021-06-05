@@ -10,28 +10,32 @@ import org.springframework.stereotype.Repository;
 import com.iranoan.yugioh.service.dto.CardDTO;
 import com.iranoan.yugioh.service.util.MockDataUtil;
 
-@Repository
-public class CardRepository {
-	private static List<CardDTO> cardDTOs;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-	static {
-		cardDTOs = MockDataUtil.generateCards();
-	}
+@Slf4j
+@Repository
+@RequiredArgsConstructor
+public class CardRepository {
+
+	private final MockDataUtil mockDataUtil;
 
 	public List<CardDTO> getAllCardDTOs() {
-		return cardDTOs;
+		return mockDataUtil.generateInitCards();
 	}
 
 	public List<CardDTO> getLimitedCardDTOs(int numberCards) {
-		return cardDTOs.stream().limit(numberCards).collect(toList());
+		List<CardDTO> allCardDTOs = getAllCardDTOs();
+		log.error("All cardDTOs: {}", allCardDTOs);
+		return getAllCardDTOs().stream().limit(numberCards).collect(toList());
 	}
 
 	public Optional<CardDTO> findByCardId(Long cardId) {
-		return cardDTOs.stream().filter(card -> card.getId().equals(cardId)).findFirst();
+		return getAllCardDTOs().stream().filter(card -> card.getId().equals(cardId)).findFirst();
 	}
 
 	public List<CardDTO> searchCardByKeyword(String keyword) {
-		return cardDTOs.stream()
+		return getAllCardDTOs().stream()
 				.filter(card -> card.getCardName().contains(keyword) || card.getCardCode().contains(keyword))
 				.collect(toList());
 	}
