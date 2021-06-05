@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MockDataUtil {
 
-	private static final int NUMBER_NEWS = 10;
+	private static final int NUMBER_NEWS = 2;
 	private final CsvReaderService csvReaderService;
 
 	public static List<NewsDTO> generateNews() {
