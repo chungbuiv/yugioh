@@ -60,6 +60,10 @@ public class CardService {
 	public List<ValueDTO> getValues(Long cardId, StatisticPeriod statisticPeriod, PriceType priceType) {
 
 		switch (statisticPeriod) {
+		case THREE_DAY:
+			return MockDataUtil.createValueDTOs(3, ChronoUnit.DAYS);
+		case ONE_WEEK:
+			return MockDataUtil.createValueDTOs(7, ChronoUnit.DAYS);
 		case ONE_MONTH:
 			return MockDataUtil.createValueDTOs(30, ChronoUnit.DAYS);
 		case THREE_MONTH:
