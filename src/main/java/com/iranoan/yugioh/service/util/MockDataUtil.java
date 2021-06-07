@@ -5,6 +5,7 @@ import static java.util.stream.Collectors.toList;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -45,6 +46,7 @@ public class MockDataUtil {
 		for (CardDetailDTO cardDetailDTO : cardDetailDTOs) {
 			CardDTO cardDTO = cardDetailDTO.getCardInfo();
 			cardDTO.setId(++index);
+			cardDTO.setImageUrl(cardDetailDTO.getRarities().get(0).getImageUrl()); // TODO
 			List<ValueDTO> valueDTOs = createValueDTOsByDay(7);
 			Integer minValue = valueDTOs.stream() //
 					.map(ValueDTO::getValue) //
@@ -108,6 +110,17 @@ public class MockDataUtil {
 	private static int getRandomValue() {
 		int randomInt = ThreadLocalRandom.current().nextInt(1, 51);
 		return 100 * randomInt;
+	}
+
+	public static List<ValueDTO> createValueDTOs(int numberElements, TemporalUnit unit) {
+		List<ValueDTO> valueDTOs = new ArrayList<>();
+		LocalDate currentDate = LocalDate.now();
+		LocalDate beginDate = currentDate.minus(numberElements - 1, unit);
+		for (int i = 0; i < numberElements; i++) {
+			ValueDTO valueDTO = new ValueDTO(beginDate.plus(i, unit).atStartOfDay(), getRandomValue());
+			valueDTOs.add(valueDTO);
+		}
+		return valueDTOs;
 	}
 
 }

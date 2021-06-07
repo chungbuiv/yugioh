@@ -1,5 +1,6 @@
 package com.iranoan.yugioh.service;
 
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -8,11 +9,15 @@ import org.springframework.stereotype.Service;
 
 import com.iranoan.yugioh.repository.CardDetailRepository;
 import com.iranoan.yugioh.repository.CardRepository;
+import com.iranoan.yugioh.service.constant.PriceType;
+import com.iranoan.yugioh.service.constant.StatisticPeriod;
 import com.iranoan.yugioh.service.dto.CardBasicDTO;
 import com.iranoan.yugioh.service.dto.CardDTO;
 import com.iranoan.yugioh.service.dto.CardDetailDTO;
 import com.iranoan.yugioh.service.dto.CardInitDTO;
 import com.iranoan.yugioh.service.dto.SearchedCardDTO;
+import com.iranoan.yugioh.service.dto.ValueDTO;
+import com.iranoan.yugioh.service.util.MockDataUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -52,4 +57,23 @@ public class CardService {
 		return cardDetailRepository.findByCardId(cardId);
 	}
 
+	public List<ValueDTO> getValues(Long cardId, StatisticPeriod statisticPeriod, PriceType priceType) {
+
+		switch (statisticPeriod) {
+		case ONE_MONTH:
+			return MockDataUtil.createValueDTOs(30, ChronoUnit.DAYS);
+		case THREE_MONTH:
+			return MockDataUtil.createValueDTOs(3, ChronoUnit.MONTHS);
+		case SIX_MONTH:
+			return MockDataUtil.createValueDTOs(6, ChronoUnit.MONTHS);
+		case ONE_YEAR:
+			return MockDataUtil.createValueDTOs(12, ChronoUnit.MONTHS);
+		case THREE_YEAR:
+			return MockDataUtil.createValueDTOs(3, ChronoUnit.YEARS);
+		case FIVE_YEAR:
+			return MockDataUtil.createValueDTOs(5, ChronoUnit.YEARS);
+		default:
+			throw new UnsupportedOperationException("Statistic type is invalid!");
+		}
+	}
 }
