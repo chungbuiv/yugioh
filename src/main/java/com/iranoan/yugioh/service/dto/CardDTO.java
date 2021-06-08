@@ -13,7 +13,6 @@ public class CardDTO extends CardBasicDTO {
 	@JsonIgnore
 	private String cardCode;
 
-	private String cardNameEnglish;
 	private String cardProperty;
 	private Integer cardRank;
 	private String cardType;

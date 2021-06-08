@@ -6,4 +6,5 @@ import lombok.Data;
 public class CardBasicDTO {
 	private Long id;
 	private String cardName;
+	private String cardNameEnglish;
 }

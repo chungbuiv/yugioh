@@ -35,8 +35,9 @@ public class CardRepository {
 	}
 
 	public List<CardDTO> searchCardByKeyword(String keyword) {
-		return getAllCardDTOs().stream()
-				.filter(card -> card.getCardName().contains(keyword) || card.getCardCode().contains(keyword))
+		return getAllCardDTOs().stream().filter(card -> card.getCardName().contains(keyword) //
+				|| card.getCardCode().contains(keyword) //
+				|| card.getCardNameEnglish().contains(keyword)) //
 				.collect(toList());
 	}
 }
