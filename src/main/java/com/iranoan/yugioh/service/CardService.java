@@ -40,6 +40,7 @@ public class CardService {
 			CardBasicDTO cardBasic = new CardBasicDTO();
 			cardBasic.setId(card.getId());
 			cardBasic.setCardName(card.getCardName());
+			cardBasic.setCardNameEnglish(card.getCardNameEnglish());
 			return cardBasic;
 		}).collect(Collectors.toList());
 		searchedCardDTO.setSearchedCards(cardBasicDTOs);
