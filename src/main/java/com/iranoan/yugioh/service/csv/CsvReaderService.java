@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -92,8 +93,12 @@ public class CsvReaderService {
 	}
 
 	private List<RarityDTO> getRarityDTOs(List<CardRarityStoreDTO> cardRarityStoreDTOs) {
-		List<RarityDTO> rarityDTOs = new ArrayList<>();
+		if (!cardRarityStoreDTOs.isEmpty()
+				&& Strings.isEmpty(cardRarityStoreDTOs.get(0).getRarityDTO().getRarityName())) {
+			cardRarityStoreDTOs.remove(0); // Remove the first element because it is the parent card information
+		}
 
+		List<RarityDTO> rarityDTOs = new ArrayList<>();
 		Map<RarityDTO, List<CardRarityStoreDTO>> rarityMap = cardRarityStoreDTOs.stream()
 				.collect(groupingBy(CardRarityStoreDTO::getRarityDTO));
 
