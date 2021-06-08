@@ -108,7 +108,7 @@ public class MockDataUtil {
 	}
 
 	private static int getRandomValue() {
-		int randomInt = ThreadLocalRandom.current().nextInt(1, 51);
+		int randomInt = ThreadLocalRandom.current().nextInt(30, 51);
 		return 100 * randomInt;
 	}
 
