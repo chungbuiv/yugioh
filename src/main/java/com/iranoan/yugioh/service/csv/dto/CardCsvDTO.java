@@ -28,9 +28,6 @@ public class CardCsvDTO {
 	private Integer cardDefence;
 
 	@CsvBindByName
-	private String cardCode;
-
-	@CsvBindByName
 	private String rarityCode;
 
 	@CsvBindByName

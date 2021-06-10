@@ -62,7 +62,6 @@ public class CsvReaderService {
 		cardDTO.setCardType(cardCsvDTO.getCardType());
 		cardDTO.setCardAttack(cardCsvDTO.getCardAttack());
 		cardDTO.setCardDefence(cardCsvDTO.getCardDefence());
-		cardDTO.setCardCode(cardCsvDTO.getCardCode());
 
 		RarityDTO rarityDTO = new RarityDTO();
 		rarityDTO.setRarityCode(cardCsvDTO.getRarityCode());
