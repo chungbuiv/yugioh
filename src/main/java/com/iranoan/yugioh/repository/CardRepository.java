@@ -8,6 +8,7 @@ import static java.util.stream.Collectors.*;
 import org.springframework.stereotype.Repository;
 
 import com.iranoan.yugioh.service.dto.CardDTO;
+import com.iranoan.yugioh.service.dto.CardDetailDTO;
 import com.iranoan.yugioh.service.util.MockDataUtil;
 
 import lombok.RequiredArgsConstructor;
@@ -35,8 +36,12 @@ public class CardRepository {
 	}
 
 	public List<CardDTO> searchCardByKeyword(String keyword) {
-		return getAllCardDTOs().stream().filter(card -> card.getCardName().contains(keyword) //
-				|| card.getCardNameEnglish().contains(keyword)) //
+		return mockDataUtil.generateCardDetails().stream()
+				.filter(cardDetail -> cardDetail.getCardInfo().getCardName().contains(keyword) //
+						|| cardDetail.getCardInfo().getCardNameEnglish().contains(keyword) //
+						|| cardDetail.getRarities().stream()
+								.anyMatch(rarity -> rarity.getRarityCode().contains(keyword))) //
+				.map(CardDetailDTO::getCardInfo) //
 				.collect(toList());
 	}
 }
