@@ -65,4 +65,7 @@ public class CardCsvDTO {
 
 	@CsvBindByName
 	private Integer buyQuality;
+
+	@CsvBindByName
+	private String otherFactor;
 }

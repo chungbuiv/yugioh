@@ -66,6 +66,7 @@ public class CsvReaderService {
 		RarityDTO rarityDTO = new RarityDTO();
 		rarityDTO.setRarityCode(cardCsvDTO.getRarityCode());
 		rarityDTO.setRarityName(cardCsvDTO.getRarityName());
+		rarityDTO.setOtherFactor(cardCsvDTO.getOtherFactor());
 		rarityDTO.setImageUrl(cardCsvDTO.getImageUrl());
 
 		StoreDTO sellStoreDTO = new StoreDTO();
