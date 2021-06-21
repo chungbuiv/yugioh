@@ -11,10 +11,10 @@ import com.iranoan.yugioh.repository.CardDetailRepository;
 import com.iranoan.yugioh.repository.CardRepository;
 import com.iranoan.yugioh.service.constant.PriceType;
 import com.iranoan.yugioh.service.constant.StatisticPeriod;
-import com.iranoan.yugioh.service.dto.CardBasicDTO;
 import com.iranoan.yugioh.service.dto.CardDTO;
 import com.iranoan.yugioh.service.dto.CardDetailDTO;
 import com.iranoan.yugioh.service.dto.CardInitDTO;
+import com.iranoan.yugioh.service.dto.CardSearchDTO;
 import com.iranoan.yugioh.service.dto.SearchedCardDTO;
 import com.iranoan.yugioh.service.dto.ValueDTO;
 import com.iranoan.yugioh.service.util.MockDataUtil;
@@ -36,12 +36,13 @@ public class CardService {
 		} else {
 			cardDTOs = cardRepository.searchCardByKeyword(keyword);
 		}
-		List<CardBasicDTO> cardBasicDTOs = cardDTOs.stream().map(card -> {
-			CardBasicDTO cardBasic = new CardBasicDTO();
-			cardBasic.setId(card.getId());
-			cardBasic.setCardName(card.getCardName());
-			cardBasic.setCardNameEnglish(card.getCardNameEnglish());
-			return cardBasic;
+		List<CardSearchDTO> cardBasicDTOs = cardDTOs.stream().map(card -> {
+			CardSearchDTO cardSearch = new CardSearchDTO();
+			cardSearch.setId(card.getId());
+			cardSearch.setCardName(card.getCardName());
+			cardSearch.setCardNameEnglish(card.getCardNameEnglish());
+			cardSearch.setImageUrl(card.getImageUrl());
+			return cardSearch;
 		}).collect(Collectors.toList());
 		searchedCardDTO.setSearchedCards(cardBasicDTOs);
 		return searchedCardDTO;

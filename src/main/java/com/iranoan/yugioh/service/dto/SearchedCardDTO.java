@@ -6,5 +6,5 @@ import lombok.Data;
 
 @Data
 public class SearchedCardDTO {
-	private List<CardBasicDTO> searchedCards;
+	private List<CardSearchDTO> searchedCards;
 }
