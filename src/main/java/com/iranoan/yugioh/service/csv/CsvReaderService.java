@@ -108,10 +108,18 @@ public class CsvReaderService {
 			rarityDTO.setRarityName(entry.getKey().getRarityName());
 			rarityDTO.setOtherFactor(entry.getKey().getOtherFactor());
 			rarityDTO.setImageUrl(entry.getKey().getImageUrl());
-			rarityDTO.setBuyStores(
-					entry.getValue().stream().map(CardRarityStoreDTO::getBuyStore).distinct().collect(toList()));
-			rarityDTO.setSellStores(
-					entry.getValue().stream().map(CardRarityStoreDTO::getSellStore).distinct().collect(toList()));
+			rarityDTO.setBuyStores( //
+					entry.getValue().stream() //
+							.map(CardRarityStoreDTO::getBuyStore) //
+							.filter(store -> store.getVolume() > 0) //
+							.distinct() //
+							.collect(toList()));
+			rarityDTO.setSellStores( //
+					entry.getValue().stream() //
+							.map(CardRarityStoreDTO::getSellStore) //
+							.filter(store -> store.getVolume() > 0) //
+							.distinct() //
+							.collect(toList()));
 			rarityDTOs.add(rarityDTO);
 		}
 
