@@ -111,7 +111,6 @@ public class CsvReaderService {
 			rarityDTO.setBuyStores( //
 					entry.getValue().stream() //
 							.map(CardRarityStoreDTO::getBuyStore) //
-							.filter(store -> store.getVolume() > 0) //
 							.distinct() //
 							.collect(toList()));
 			rarityDTO.setSellStores( //
